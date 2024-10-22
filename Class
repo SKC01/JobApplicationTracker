@@ -1,0 +1,34 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+public class JobApplicationTracker
+{
+    private List<JobApplication> applications = new List<JobApplication>();
+    public void AddApplication(JobApplication application)
+    {
+        applications.Add(application);
+    }
+    public void UpdateStatus(string companyName, string newStatus)
+    {
+        var application = applications.FirstOrDefault(a => a.CompanyName == companyName);
+        if (application != null)
+        {
+            application.Status = newStatus;
+        }
+    }
+    public void ListApplications()
+    {
+        foreach (var app in applications)
+        {
+            Console.WriteLine($"{app.CompanyName} - {app.JobTitle} - {app.Status}");
+        }
+    }
+    public List<JobApplication> SortByApplicationDate()
+    {
+        return applications.OrderBy(a => a.ApplicationDate).ToList();
+    }
+    public List<JobApplication> SearchByCompany(string companyName)
+    {
+        return applications.Where(a => a.CompanyName.Contains(companyName, StringComparison.OrdinalIgnoreCase)).ToList();
+    }
+}
