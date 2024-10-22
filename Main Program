@@ -1,0 +1,26 @@
+using System;
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        JobApplicationTracker tracker = new JobApplicationTracker();
+        tracker.AddApplication(new JobApplication("Company A", "Developer", DateTime.Now, "Develop software", "recruiter@companya.com", "Applied"));
+        tracker.AddApplication(new JobApplication("Company B", "Manager", DateTime.Now.AddDays(-1), "Manage team", "recruiter@companyb.com", "Interview Scheduled"));
+        tracker.ListApplications();
+        tracker.UpdateStatus("Company A", "Interview Scheduled");
+        Console.WriteLine("\nAfter updating status:");
+        tracker.ListApplications();
+        var sortedApplications = tracker.SortByApplicationDate();
+        Console.WriteLine("\nSorted Applications:");
+        foreach (var app in sortedApplications)
+        {
+            Console.WriteLine($"{app.ApplicationDate.ToShortDateString()} - {app.CompanyName} - {app.JobTitle}");
+        }
+        var searchResults = tracker.SearchByCompany("Company A");
+        Console.WriteLine("\nSearch Results:");
+        foreach (var app in searchResults)
+        {
+            Console.WriteLine($"{app.CompanyName} - {app.JobTitle} - {app.Status}");
+        }
+    }
+}
