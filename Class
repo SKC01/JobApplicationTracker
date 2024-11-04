@@ -32,3 +32,27 @@ public class JobApplicationTracker
         return applications.Where(a => a.CompanyName.Contains(companyName, StringComparison.OrdinalIgnoreCase)).ToList();
     }
 }
+
+public class JobApplication
+{
+    public string CompanyName { get; set; }
+    public string JobTitle { get; set; }
+    public DateTime ApplicationDate { get; set; }
+    public string JobDescription { get; set; }
+    public string RecruiterContact { get; set; }
+    public string Status { get; set; }
+    public string Notes { get; set; } // New Notes section
+
+    public JobApplication(string companyName, string jobTitle, DateTime applicationDate, 
+                          string jobDescription, string recruiterContact, string status, 
+                          string notes = "")
+    {
+        CompanyName = companyName;
+        JobTitle = jobTitle;
+        ApplicationDate = applicationDate;
+        JobDescription = jobDescription;
+        RecruiterContact = recruiterContact;
+        Status = status;
+        Notes = notes;
+    }
+}
